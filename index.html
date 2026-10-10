@@ -379,19 +379,19 @@ footer{border-top:var(--bw) solid var(--ink)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.swap{animation:none}*{transition-duration:.01ms!important}}
 </style>
 </head>
-<body>
+<body id="top">
 
 <header class="nav">
   <div class="wrap">
-    <a class="logo" href="https://growgreenweedcontrol.com/" aria-label="Grow Green Weed Control home">
+    <a class="logo" href="#top" aria-label="Grow Green Weed Control home">
       <img src="https://growgreenweedcontrol.com/wp-content/uploads/2021/07/Grow-Green-Logo.png" alt="Grow Green Weed Control" width="72" height="60">
     </a>
     <ul class="nav-links" id="menu">
-      <li><a href="https://growgreenweedcontrol.com/services/">Services</a></li>
-      <li><a href="https://growgreenweedcontrol.com/about/">About Us</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About Us</a></li>
       <li><a href="https://growgreenweedcontrol.com/lawn-care-blog/">Lawn Tips</a></li>
       <li><a href="https://growgreenweedcontrol.com/careers/">Careers</a></li>
-      <li><a href="https://growgreenweedcontrol.com/contact/">Contact</a></li>
+      <li><a href="#quote">Contact</a></li>
       <li><a href="https://portal.growgreenweedcontrol.com/portal">Customer Login</a></li>
     </ul>
     <a class="nav-phone" href="tel:+12254613199" aria-label="Call (225) 461-3199"><i class="ph-bold ph-phone"></i><span>(225) 461-3199</span></a>
@@ -490,7 +490,7 @@ footer{border-top:var(--bw) solid var(--ink)}
     </div>
     <div class="year-foot" data-reveal>
       <span>Customized for Bermuda, St. Augustine, Centipede, and Zoysia.</span>
-      <a class="textlink" href="https://growgreenweedcontrol.com/lawn-fertilization-weed-control/">Explore the lawn program</a>
+      <a class="textlink" href="#services" data-pick="0">See the lawn program</a>
     </div>
   </div>
 </section>
@@ -645,28 +645,28 @@ footer{border-top:var(--bw) solid var(--ink)}
   <div class="wrap">
     <div class="foot">
       <div>
-        <a class="logo" href="https://growgreenweedcontrol.com/" style="display:inline-flex"><img loading="lazy" src="https://growgreenweedcontrol.com/wp-content/uploads/2021/07/Grow-Green-Logo.png" alt="Grow Green Weed Control" width="96" height="80" style="height:80px"></a>
+        <a class="logo" href="#top" style="display:inline-flex"><img loading="lazy" src="https://growgreenweedcontrol.com/wp-content/uploads/2021/07/Grow-Green-Logo.png" alt="Grow Green Weed Control" width="96" height="80" style="height:80px"></a>
         <p>South Louisiana lawn specialists. Licensed and insured. Locally owned since 2021.</p>
       </div>
       <div>
         <h4>Our services</h4>
         <ul>
-          <li><a href="https://growgreenweedcontrol.com/lawn-fertilization-weed-control/">Lawn Fertilization & Weed Control</a></li>
-          <li><a href="https://growgreenweedcontrol.com/core-aeration/">Core Aeration</a></li>
-          <li><a href="https://growgreenweedcontrol.com/liquid-aeration/">Liquid Aeration</a></li>
-          <li><a href="https://growgreenweedcontrol.com/tree-and-shrub-care/">Tree & Shrub Care</a></li>
-          <li><a href="https://growgreenweedcontrol.com/fire-ant-treatment/">Fire Ant Control</a></li>
-          <li><a href="https://growgreenweedcontrol.com/flower-bed-weed-control-and-fertilization/">Flower Bed Weed Control</a></li>
-          <li><a href="https://growgreenweedcontrol.com/mosquito-flea-tick-treatments/">Mosquito, Flea & Tick</a></li>
+          <li><a href="#services" data-pick="0">Lawn Fertilization & Weed Control</a></li>
+          <li><a href="#services" data-pick="4">Core Aeration</a></li>
+          <li><a href="#services" data-pick="4">Liquid Aeration</a></li>
+          <li><a href="#services" data-pick="3">Tree & Shrub Care</a></li>
+          <li><a href="#services" data-pick="1">Fire Ant Control</a></li>
+          <li><a href="#services" data-pick="2">Flower Bed Weed Control</a></li>
+          <li><a href="#services" data-pick="5">Mosquito, Flea & Tick</a></li>
           <li><a href="https://growgreenweedcontrol.com/lawn-fungus/">Lawn Fungus</a></li>
         </ul>
       </div>
       <div>
         <h4>Company</h4>
         <ul>
-          <li><a href="https://growgreenweedcontrol.com/about-us/">About Us</a></li>
+          <li><a href="#about">About Us</a></li>
           <li><a href="https://growgreenweedcontrol.com/lawn-care-blog/">Lawn Tips</a></li>
-          <li><a href="https://growgreenweedcontrol.com/contact-us/">Contact</a></li>
+          <li><a href="#quote">Contact</a></li>
           <li><a href="https://growgreenweedcontrol.com/careers/">Careers</a></li>
           <li><a href="https://portal.growgreenweedcontrol.com/portal/login/">Customer Login</a></li>
         </ul>
@@ -850,12 +850,18 @@ const towns = [
   ['Sorrento', 30.183, -90.859, 'lawn-treatments-ascension/'],
 ];
 const box = { n: 30.74, s: 30.09, w: -91.29, e: -90.66 };
-const townUrl = (u) => (u.startsWith('#') ? u : SITE + u);
-$('#map').insertAdjacentHTML('beforeend', towns.map(([name, lat, lon, url, cls = '']) => {
+// Mockup: a town link starts a quote for that town. In production, point these at the town pages (4th item in each row).
+$('#map').insertAdjacentHTML('beforeend', towns.map(([name, lat, lon, , cls = '']) => {
   const x = ((lon - box.w) / (box.e - box.w)) * 100, y = ((box.n - lat) / (box.n - box.s)) * 100;
-  return `<a class="${cls}" tabindex="-1" href="${townUrl(url)}" style="left:${x.toFixed(1)}%;top:${y.toFixed(1)}%"><span>${name}${cls === 'office' ? '<small>Our office</small>' : ''}</span></a>`;
+  return `<a class="${cls}" tabindex="-1" href="#quote" data-city="${name}" style="left:${x.toFixed(1)}%;top:${y.toFixed(1)}%"><span>${name}${cls === 'office' ? '<small>Our office</small>' : ''}</span></a>`;
 }).join(''));
-$('#townList').innerHTML = towns.map(([name, , , url]) => `<li><a href="${townUrl(url)}">${name}</a></li>`).join('');
+$('#townList').innerHTML = towns.map(([name]) => `<li><a href="#quote" data-city="${name}">${name}</a></li>`).join('');
+document.querySelectorAll('[data-city]').forEach((a) => a.addEventListener('click', () => { $('#qCity').value = a.dataset.city; }));
+
+// Links that name a service open that service in the picker
+document.querySelectorAll('[data-pick]').forEach((a) => a.addEventListener('click', () => $('#pickerTabs').children[a.dataset.pick].click()));
+// Pages this mockup doesn't include (blog, careers, portal, legal, service detail) open the live site in a new tab
+document.querySelectorAll('a[href^="http"]').forEach((a) => { a.target = '_blank'; a.rel = 'noopener'; });
 const railStep = (dir) => rail.scrollBy({ left: dir * (267 + 16) * 3, behavior: 'smooth' });
 $('#reelPrev').addEventListener('click', () => railStep(-1));
 $('#reelNext').addEventListener('click', () => railStep(1));
@@ -863,6 +869,7 @@ $('#reelNext').addEventListener('click', () => railStep(1));
 // Mobile menu
 const menuBtn = $('.menu-btn');
 menuBtn.addEventListener('click', () => menuBtn.setAttribute('aria-expanded', $('#menu').classList.toggle('open')));
+$('#menu').addEventListener('click', (e) => { if (e.target.closest('a')) { $('#menu').classList.remove('open'); menuBtn.setAttribute('aria-expanded', false); } });
 
 // Scroll reveal
 const io = new IntersectionObserver((entries) => entries.forEach((en) => {
